@@ -35,7 +35,7 @@ const orderSchema = new mongoose.Schema({
 const Order = mongoose.model("Order", orderSchema);
 
 // =========================
-// 👉 GENERAL SUBMIT (cikyah / others)
+// 👉 SUBMIT (CIKYAH)
 // =========================
 app.post("/submit", async (req, res) => {
     try {
@@ -47,7 +47,7 @@ app.post("/submit", async (req, res) => {
 
         await new Order({ date, dessert, price: p, quantity: q, total }).save();
 
-        res.send(successPage("Order Successful!", date, dessert, p, q, total, "/mainpage.html"));
+        res.send(successPage("Cikyah Order Successful!", date, dessert, p, q, total, "/cikyah.html"));
 
     } catch (err) {
         console.log(err);
@@ -56,7 +56,7 @@ app.post("/submit", async (req, res) => {
 });
 
 // =========================
-// 👉 RM3 SUBMIT ONLY
+// 👉 SUBMIT RM3
 // =========================
 app.post("/submit-rm3", async (req, res) => {
     try {
@@ -89,7 +89,18 @@ app.get("/orders", async (req, res) => {
 // =========================
 app.get("/rm3orders", async (req, res) => {
     const orders = await Order.find({ dessert: "Puding Roti" }).sort({ date: -1 });
-    res.send(getStyledTable("📊 RM3 Orders (Puding Roti)", orders));
+    res.send(getStyledTable("📊 RM3 Orders", orders));
+});
+
+// =========================
+// 👉 CIKYAH ORDERS ONLY
+// =========================
+app.get("/cikyahorders", async (req, res) => {
+    const orders = await Order.find({
+        dessert: { $ne: "Puding Roti" } // exclude RM3
+    }).sort({ date: -1 });
+
+    res.send(getStyledTable("📊 Cikyah Orders", orders));
 });
 
 // =========================
@@ -122,7 +133,7 @@ function successPage(title, date, dessert, price, qty, total, backLink) {
 }
 
 // =========================
-// 👉 TABLE TEMPLATE (THEME)
+// 👉 TABLE TEMPLATE
 // =========================
 function getStyledTable(title, orders) {
 
@@ -195,7 +206,8 @@ function getStyledTable(title, orders) {
 
         <nav>
             <a href="/mainpage.html">Home</a>
-            <a href="/rm3.html">RM3 Order</a>
+            <a href="/cikyah.html">Cikyah</a>
+            <a href="/rm3.html">RM3</a>
             <a href="/orders">All Orders</a>
         </nav>
 
@@ -212,7 +224,7 @@ function getStyledTable(title, orders) {
             ${rows}
         </table>
 
-        <a class="btn" href="/orderpage.html">Back</a>
+        <a class="btn" href="/mainpage.html">Back</a>
 
         <footer>
             <p>© 2026 QuickDessert - Niysa</p>
