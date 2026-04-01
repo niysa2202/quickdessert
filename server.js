@@ -212,7 +212,7 @@ function getStyledTable(title, orders) {
             ${rows}
         </table>
 
-        <a class="btn" href="/mainpage.html">Back</a>
+        <a class="btn" href="/orderpage.html">Back</a>
 
         <footer>
             <p>© 2026 QuickDessert - Niysa</p>
