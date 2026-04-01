@@ -8,7 +8,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 // MongoDB connection
-mongoose.connect("mongodb+srv://niysa2202:Nisa1703%23@quickdessert.qzdlrh3.mongodb.net/quickdessert?retryWrites=true&w=majority")
+mongoose.connect("mongodb+srv://niysa2202:Nisa1704%23@quickdessert.qzdlrh3.mongodb.net/quickdessert?retryWrites=true&w=majority")
 .then(() => console.log("✅ MongoDB Connected"))
 .catch(err => console.log(err));
 
