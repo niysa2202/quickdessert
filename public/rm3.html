@@ -1,95 +1,95 @@
 <!DOCTYPE html>
+
 <html>
 <head>
     <title>QuickDessert - RM3 Order</title>
 
-    <style>
-        body{
-            font-family: Arial, sans-serif;
-            margin:0;
-            background-color:#fdfdfd;
-        }
+<style>
+    body{
+        font-family: Arial, sans-serif;
+        margin:0;
+        background-color:#fdfdfd;
+    }
 
-        /* Header */
-        header{
-            background:#F9CDD5;
-            color:black;
-            padding:20px;
-            text-align:center;
-        }
+    header{
+        background:#F9CDD5;
+        color:black;
+        padding:20px;
+        text-align:center;
+    }
 
-        /* Navigation */
-        nav{
-            background:#A5B68D;
-            padding:10px;
-            text-align:center;
-        }
+    nav{
+        background:#A5B68D;
+        padding:10px;
+        text-align:center;
+    }
 
-        nav a{
-            color:black;
-            text-decoration:none;
-            margin:15px;
-            font-weight:bold;
-        }
+    nav a{
+        color:black;
+        text-decoration:none;
+        margin:15px;
+        font-weight:bold;
+    }
 
-        nav a:hover{
-            text-decoration:underline;
-        }
+    nav a:hover{
+        text-decoration:underline;
+    }
 
-        .container{
-            padding:40px;
-            text-align:center;
-        }
+    .container{
+        padding:40px;
+        text-align:center;
+    }
 
-        h2{
-            color:#ff8fb1;
-        }
+    h2{
+        color:#ff8fb1;
+    }
 
-        form{
-            background:#ffe6ef;
-            display:inline-block;
-            padding:30px 40px;
-            border-radius:10px;
-            box-shadow:0 4px 8px rgba(0,0,0,0.1);
-            text-align:left;
-        }
+    form{
+        background:#ffe6ef;
+        display:inline-block;
+        padding:30px 40px;
+        border-radius:10px;
+        box-shadow:0 4px 8px rgba(0,0,0,0.1);
+        text-align:left;
+    }
 
-        .form-group{
-            margin-bottom:15px;
-        }
+    .form-group{
+        margin-bottom:15px;
+    }
 
-        label{
-            display:block;
-            margin-bottom:5px;
-            font-weight:bold;
-        }
+    label{
+        display:block;
+        margin-bottom:5px;
+        font-weight:bold;
+    }
 
-        input{
-            width:100%;
-            padding:8px;
-            border-radius:5px;
-            border:1px solid #ccc;
-        }
+    input{
+        width:100%;
+        padding:8px;
+        border-radius:5px;
+        border:1px solid #ccc;
+    }
 
-        .static-text{
-            margin-bottom:10px;
-        }
+    .static-text{
+        margin-bottom:10px;
+    }
 
-        button{
-            width:100%;
-            margin-top:15px;
-            padding:10px;
-            background:#A5B68D;
-            border:none;
-            color:white;
-            border-radius:5px;
-            cursor:pointer;
-        }
+    button{
+        width:100%;
+        margin-top:15px;
+        padding:10px;
+        background:#A5B68D;
+        border:none;
+        color:white;
+        border-radius:5px;
+        cursor:pointer;
+    }
 
-        button:hover{
-            background:#5fc43c;
-        }
-    </style>
+    button:hover{
+        background:#5fc43c;
+    }
+</style>
+
 </head>
 
 <body>
@@ -103,37 +103,43 @@
     <a href="mainpage.html">Home</a>
     <a href="orderpage.html">Order</a>
     <a href="recipepage.html">Recipe</a>
+    <a href="/rm3orders">View Order</a>
 </nav>
 
 <div class="container">
 
-    <h2>RM3 Dessert Order</h2>
+<h2>RM3 Dessert Order</h2>
 
-    <form>
+<!-- ✅ CONNECTED FORM -->
+<form action="/submit-rm3" method="post">
 
-        <div class="form-group">
-            <label>Menu:</label>
-            <div class="static-text">Puding Roti</div>
-        </div>
+    <!-- hidden values -->
+    <input type="hidden" name="dessert" value="Puding Roti">
+    <input type="hidden" name="price" value="3.00">
 
-        <div class="form-group">
-            <label>Price:</label>
-            <div class="static-text">RM3.00</div>
-        </div>
+    <div class="form-group">
+        <label>Menu:</label>
+        <div class="static-text">Puding Roti</div>
+    </div>
 
-        <div class="form-group">
-            <label>Select Date:</label>
-            <input type="date" name="date" required>
-        </div>
+    <div class="form-group">
+        <label>Price:</label>
+        <div class="static-text">RM3.00</div>
+    </div>
 
-        <div class="form-group">
-            <label>Quantity:</label>
-            <input type="number" name="quantity" min="1" required>
-        </div>
+    <div class="form-group">
+        <label>Select Date:</label>
+        <input type="date" name="date" required>
+    </div>
 
-        <button type="submit">Submit Order</button>
+    <div class="form-group">
+        <label>Quantity:</label>
+        <input type="number" name="quantity" min="1" required>
+    </div>
 
-    </form>
+    <button type="submit">Submit Order</button>
+
+</form>
 
 </div>
 
