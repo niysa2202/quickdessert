@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -32,30 +31,64 @@
         color:black;
     }
 
+    nav a:hover{
+        text-decoration:underline;
+    }
+
     .container{
         padding:40px;
         text-align:center;
     }
 
+    h2{
+        color:#ff8fb1;
+    }
+
+    /* ✅ FIXED FORM (same as RM3) */
     form{
         display:inline-block;
         background:#ffe6ef;
-        padding:25px;
+        padding:30px 40px;
         border-radius:10px;
+        box-shadow:0 4px 8px rgba(0,0,0,0.1);
+        text-align:left;
+        max-width:300px;   /* 🔥 makes it compact */
+    }
+
+    label{
+        display:block;
+        margin-top:10px;
+        font-weight:bold;
     }
 
     input, select{
         width:100%;
         padding:8px;
-        margin:10px 0;
+        margin-top:5px;
+        border-radius:5px;
+        border:1px solid #ccc;
     }
 
     button{
+        margin-top:15px;
         background:#A5B68D;
         color:white;
         padding:10px;
         border:none;
         width:100%;
+        border-radius:5px;
+        cursor:pointer;
+    }
+
+    button:hover{
+        background:#5fc43c;
+    }
+
+    footer{
+        margin-top:40px;
+        background:#F9CDD5;
+        text-align:center;
+        padding:10px;
     }
 </style>
 
@@ -65,45 +98,50 @@
 
 <header>
     <h1>QuickDessert</h1>
+    <p>Dessert is not a meal, it is a moment</p>
 </header>
 
 <nav>
     <a href="mainpage.html">Home</a>
     <a href="orderpage.html">Order</a>
     <a href="recipepage.html">Recipe</a>
-    <a href="/orders">View Order</a>
+    <a href="/rm3orders">View Order</a>
 </nav>
 
 <div class="container">
     <h2>CIKYAH SALES</h2>
 
-<form action="/submit" method="post">
+    <form action="/submit" method="post">
 
-<label for="date">Select Date:</label>
-<input type="date" id="date" name="date" required>
+        <label for="date">Select Date:</label>
+        <input type="date" id="date" name="date" required>
 
-<label for="dessert">Select Dessert:</label>
-<select id="dessert" name="dessert" required>
-    <option value="Brownies">Brownies</option>
-    <option value="Cheesetart">Cheesetart</option>
-    <option value="Burnt Cheesecake">Burnt Cheesecake</option>
-</select>
+        <label for="dessert">Select Dessert:</label>
+        <select id="dessert" name="dessert" required>
+            <option value="Brownies">Brownies</option>
+            <option value="Cheesetart">Cheesetart</option>
+            <option value="Burnt Cheesecake">Burnt Cheesecake</option>
+        </select>
 
-<label for="price">Price (RM):</label>
-<select id="price" name="price" required>
-    <option value="3.50">RM 3.50</option>
-    <option value="4.50">RM 4.50</option>
-    <option value="5.00">RM 5.00</option>
-</select>
+        <label for="price">Price (RM):</label>
+        <select id="price" name="price" required>
+            <option value="3.50">RM 3.50</option>
+            <option value="4.50">RM 4.50</option>
+            <option value="5.00">RM 5.00</option>
+        </select>
 
-<label for="quantity">Quantity:</label>
-<input type="number" id="quantity" name="quantity" min="1" required>
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" min="1" required>
 
-<button type="submit">Submit Order</button>
+        <button type="submit">Submit Order</button>
 
-</form>
+    </form>
 
 </div>
+
+<footer>
+    <p>© 2026 QuickDessert - Niysa</p>
+</footer>
 
 </body>
 </html>
