@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>QuickDessert</title>
+    <style>
+
+        body{
+            font-family: Arial, sans-serif;
+            margin:0;
+            background-color:#fdfdfd;
+        }
+
+        header{
+            background:#F9CDD5;
+            color:black;
+            padding:20px;
+            text-align:center;
+        }
+
+        nav{
+            background:#A5B68D;
+            padding:10px;
+            text-align:center;
+        }
+
+        nav a{
+            color:black;
+            text-decoration:none;
+            margin:15px;
+            font-weight:bold;
+        }
+
+        nav a:hover{
+            text-decoration:underline;
+        }
+
+        .container{
+            padding:40px;
+            text-align:center;
+        }
+
+        h2{
+            color:#ff8fb1;
+        }
+
+        /* Form styling */
+        form{
+            display:inline-block;
+            background:#ffe6ef;
+            padding:25px 40px;
+            border-radius:10px;
+            box-shadow:0 4px 8px rgba(0,0,0,0.1);
+            text-align:left;
+        }
+
+        .form-group{
+            margin-bottom:15px;
+        }
+
+        label{
+            display:block;
+            margin-bottom:5px;
+            font-weight:bold;
+        }
+
+        input, select{
+            width:100%;
+            padding:8px;
+            border-radius:5px;
+            border:1px solid #ccc;
+        }
+
+        button{
+            width:100%;
+            background:#A5B68D;
+            border:none;
+            padding:10px;
+            color:white;
+            border-radius:5px;
+            cursor:pointer;
+        }
+
+        button:hover{
+            background:#5fc43c;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>QuickDessert</h1>
+    <p>Dessert is not a meal, it is a moment</p>
+</header>
+
+<nav>
+    <a href="mainpage.html">Home</a>
+    <a href="orderpage.html">Order</a>
+    <a href="recipepage.html">Recipe</a>
+</nav>
+
+<div class="container">
+    <h2>QUICKCOOKIES SALES</h2>
+
+    <form action="CikyahServlet" method="post">
+
+        <div class="form-group">
+            <label>Select Date:</label>
+            <input type="date" name="date" required>
+        </div>
+
+        <div class="form-group">
+            <label>Select QuickCookies:</label>
+            <select name="cookies">
+                <option>Almond London</option>
+                <option>Brownies Cookies</option>
+                <option>Tart Nenas</option>
+                <option>Semperit Susu</option>
+                <option>Callebaut Cookies</option>
+                <option>Sea Salt Cookies</option> 
+                <option>Rainbow Cookies</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Price (RM):</label>
+            <select name="price">
+                <option>20.00</option>
+                <option>25.00</option>
+                <option>28.00</option>
+                <option>30.00</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Quantity:</label>
+            <input type="number" name="quantity" min="1" required>
+        </div>
+
+        <button type="submit">Submit Order</button>
+
+    </form>
+</div>
+
+</body>
+</html>

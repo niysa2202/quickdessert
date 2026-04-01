@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>QuickDessert - Order</title>
+    <style>
+
+        body{
+            font-family: Arial, sans-serif;
+            margin:0;
+            background-color:#fdfdfd;
+        }
+
+        /* Header */
+        header{
+            background:#F9CDD5;
+            color:black;
+            padding:20px;
+            text-align:center;
+        }
+
+        /* Navigation */
+        nav{
+            background:#A5B68D;
+            padding:10px;
+            text-align:center;
+        }
+
+        nav a{
+            color:black;
+            text-decoration:none;
+            margin:15px;
+            font-weight:bold;
+        }
+
+        nav a:hover{
+            text-decoration:underline;
+        }
+
+        /* Main container */
+        .container{
+            padding:40px;
+            text-align:center;
+        }
+
+        h2{
+            color:#ff8fb1;
+        }
+
+        /* Category card */
+        .card{
+            display:inline-block;
+            width:220px;
+            padding:25px;
+            margin:20px;
+            border-radius:10px;
+            background:#ffe6ef;
+            box-shadow:0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        button{
+            background:#A5B68D;
+            border:none;
+            padding:10px 15px;
+            color:white;
+            border-radius:5px;
+            cursor:pointer;
+        }
+
+        button:hover{
+            background:#5fc43c;
+        }
+
+        footer{
+            margin-top:40px;
+            background:#F9CDD5;
+            color:black;
+            text-align:center;
+            padding:10px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>QuickDessert</h1>
+    <p>Dessert is not a meal, it is a moment</p>
+</header>
+
+<nav>
+    <a href="mainpage.html">Home</a>
+    <a href="orderpage.html">Order</a>
+    <a href="recipepage.html">Recipe</a>
+</nav>
+
+<div class="container">
+
+    <h2>Select Your Order Category</h2>
+
+    <div class="card">
+        <h3>Cikyah</h3>
+        <p>Desserts from Cikyah vendor</p>
+        <button onclick="location.href='cikyah.html'">View Items</button>
+    </div>
+
+    <div class="card">
+        <h3>Kedai RM3</h3>
+        <p>Affordable desserts for RM3</p>
+        <button onclick="location.href='rm3.html'">View Items</button>
+    </div>
+
+    <div class="card">
+        <h3>Dessert Table</h3>
+        <p>Creativation of dessert table</p>
+        <button onclick="location.href='desserttable.html'">View Items</button>
+    </div>
+
+    <div class="card">
+        <h3>Kuih Raya</h3>
+        <p>Traditional festive cookies</p>
+        <button onclick="location.href='kuihraya.html'">View Items</button>
+    </div>
+
+    <div class="card">
+        <h3>Personal</h3>
+        <p>Custom or personal orders</p>
+        <button onclick="location.href='personal.html'">View Items</button>
+    </div>
+
+</div>
+
+<footer>
+    <p>© 2026 QuickDessert - Niysa</p>
+</footer>
+
+</body>
+</html>

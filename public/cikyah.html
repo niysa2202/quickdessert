@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickDessert</title>
+
+<style>
+    body{
+        font-family: Arial, sans-serif;
+        margin:0;
+        background:#fdfdfd;
+    }
+
+    header{
+        background:#F9CDD5;
+        padding:20px;
+        text-align:center;
+    }
+
+    nav{
+        background:#A5B68D;
+        padding:10px;
+        text-align:center;
+    }
+
+    nav a{
+        margin:10px;
+        text-decoration:none;
+        font-weight:bold;
+        color:black;
+    }
+
+    .container{
+        padding:40px;
+        text-align:center;
+    }
+
+    form{
+        display:inline-block;
+        background:#ffe6ef;
+        padding:25px;
+        border-radius:10px;
+    }
+
+    input, select{
+        width:100%;
+        padding:8px;
+        margin:10px 0;
+    }
+
+    button{
+        background:#A5B68D;
+        color:white;
+        padding:10px;
+        border:none;
+        width:100%;
+    }
+</style>
+
+</head>
+
+<body>
+
+<header>
+    <h1>QuickDessert</h1>
+</header>
+
+<nav>
+    <a href="/cikyah.html">Order</a>
+    <a href="/orders">View Orders</a>
+</nav>
+
+<div class="container">
+    <h2>CIKYAH SALES</h2>
+
+<form action="/submit" method="post">
+
+<label for="date">Select Date:</label>
+<input type="date" id="date" name="date" required>
+
+<label for="dessert">Select Dessert:</label>
+<select id="dessert" name="dessert" required>
+    <option value="Brownies">Brownies</option>
+    <option value="Cheesetart">Cheesetart</option>
+    <option value="Burnt Cheesecake">Burnt Cheesecake</option>
+</select>
+
+<label for="price">Price (RM):</label>
+<select id="price" name="price" required>
+    <option value="3.50">RM 3.50</option>
+    <option value="4.50">RM 4.50</option>
+    <option value="5.00">RM 5.00</option>
+</select>
+
+<label for="quantity">Quantity:</label>
+<input type="number" id="quantity" name="quantity" min="1" required>
+
+<button type="submit">Submit Order</button>
+
+</form>
+
+</div>
+
+</body>
+</html>
