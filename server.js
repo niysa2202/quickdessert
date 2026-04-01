@@ -140,7 +140,7 @@ app.get("/orders", async (req, res) => {
             </tr>
             ${rows}
         </table>
-        <br><a href="/mainpage.html">Back</a>
+        <br><a href="/orderpage.html">Back</a>
     `);
 });
 
