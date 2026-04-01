@@ -35,7 +35,7 @@ const orderSchema = new mongoose.Schema({
 const Order = mongoose.model("Order", orderSchema);
 
 // =========================
-// 👉 SUBMIT ORDER
+// 👉 GENERAL SUBMIT (cikyah / others)
 // =========================
 app.post("/submit", async (req, res) => {
     try {
@@ -45,39 +45,9 @@ app.post("/submit", async (req, res) => {
         const q = parseInt(quantity);
         const total = p * q;
 
-        const newOrder = new Order({
-            date,
-            dessert,
-            price: p,
-            quantity: q,
-            total: total
-        });
+        await new Order({ date, dessert, price: p, quantity: q, total }).save();
 
-        await newOrder.save();
-
-        res.send(`
-        <html>
-        <head>
-            <title>Order Result</title>
-            <style>
-                body { font-family: Arial; text-align: center; padding: 40px; background: #fdfdfd; }
-                .box { background: #ffe6ef; padding: 30px; border-radius: 10px; display: inline-block; }
-                a { margin-top: 20px; text-decoration: none; background: #A5B68D; color: white; padding: 10px 15px; border-radius: 5px; display:inline-block;}
-            </style>
-        </head>
-        <body>
-            <div class="box">
-                <h2>🎉 Order Successful!</h2>
-                <p><b>Date:</b> ${date}</p>
-                <p><b>Dessert:</b> ${dessert}</p>
-                <p><b>Price:</b> RM ${p}</p>
-                <p><b>Quantity:</b> ${q}</p>
-                <h3>Total: RM ${total}</h3>
-                <a href="/mainpage.html">Back</a>
-            </div>
-        </body>
-        </html>
-        `);
+        res.send(successPage("Order Successful!", date, dessert, p, q, total, "/mainpage.html"));
 
     } catch (err) {
         console.log(err);
@@ -86,24 +56,32 @@ app.post("/submit", async (req, res) => {
 });
 
 // =========================
-// 👉 ALL ORDERS (THEMED)
+// 👉 RM3 SUBMIT ONLY
+// =========================
+app.post("/submit-rm3", async (req, res) => {
+    try {
+        const { date, dessert, price, quantity } = req.body;
+
+        const p = parseFloat(price);
+        const q = parseInt(quantity);
+        const total = p * q;
+
+        await new Order({ date, dessert, price: p, quantity: q, total }).save();
+
+        res.send(successPage("RM3 Order Successful!", date, dessert, p, q, total, "/rm3.html"));
+
+    } catch (err) {
+        console.log(err);
+        res.send("❌ Error saving RM3 order");
+    }
+});
+
+// =========================
+// 👉 ALL ORDERS
 // =========================
 app.get("/orders", async (req, res) => {
     const orders = await Order.find().sort({ date: -1 });
-
-    let rows = "";
-    orders.forEach(o => {
-        rows += `
-        <tr>
-            <td>${o.date}</td>
-            <td>${o.dessert}</td>
-            <td>RM ${o.price}</td>
-            <td>${o.quantity}</td>
-            <td>RM ${o.total}</td>
-        </tr>`;
-    });
-
-    res.send(getStyledPage("📊 All Orders", rows));
+    res.send(getStyledTable("📊 All Orders", orders));
 });
 
 // =========================
@@ -111,6 +89,42 @@ app.get("/orders", async (req, res) => {
 // =========================
 app.get("/rm3orders", async (req, res) => {
     const orders = await Order.find({ dessert: "Puding Roti" }).sort({ date: -1 });
+    res.send(getStyledTable("📊 RM3 Orders (Puding Roti)", orders));
+});
+
+// =========================
+// 👉 SUCCESS PAGE TEMPLATE
+// =========================
+function successPage(title, date, dessert, price, qty, total, backLink) {
+    return `
+    <html>
+    <head>
+        <title>${title}</title>
+        <style>
+            body { font-family: Arial; text-align: center; padding: 40px; background: #fdfdfd; }
+            .box { background: #ffe6ef; padding: 30px; border-radius: 10px; display: inline-block; }
+            a { margin-top: 20px; text-decoration: none; background: #A5B68D; color: white; padding: 10px 15px; border-radius: 5px; display:inline-block;}
+        </style>
+    </head>
+    <body>
+        <div class="box">
+            <h2>🎉 ${title}</h2>
+            <p><b>Date:</b> ${date}</p>
+            <p><b>Dessert:</b> ${dessert}</p>
+            <p><b>Price:</b> RM ${price}</p>
+            <p><b>Quantity:</b> ${qty}</p>
+            <h3>Total: RM ${total}</h3>
+            <a href="${backLink}">Back</a>
+        </div>
+    </body>
+    </html>
+    `;
+}
+
+// =========================
+// 👉 TABLE TEMPLATE (THEME)
+// =========================
+function getStyledTable(title, orders) {
 
     let rows = "";
     orders.forEach(o => {
@@ -124,93 +138,51 @@ app.get("/rm3orders", async (req, res) => {
         </tr>`;
     });
 
-    res.send(getStyledPage("📊 RM3 Orders (Puding Roti)", rows));
-});
-
-// =========================
-// 👉 REUSABLE THEME FUNCTION 🔥
-// =========================
-function getStyledPage(title, rows) {
     return `
     <html>
     <head>
         <title>${title}</title>
         <style>
-            body {
-                font-family: Arial;
-                margin: 0;
-                background-color: #fdfdfd;
-                text-align: center;
-            }
+            body { font-family: Arial; margin:0; background:#fdfdfd; text-align:center; }
 
-            header {
-                background: #F9CDD5;
-                padding: 20px;
-            }
-
-            nav {
-                background: #A5B68D;
-                padding: 10px;
-            }
+            header { background:#F9CDD5; padding:20px; }
+            nav { background:#A5B68D; padding:10px; }
 
             nav a {
-                color: black;
-                text-decoration: none;
-                margin: 15px;
-                font-weight: bold;
+                color:black;
+                text-decoration:none;
+                margin:15px;
+                font-weight:bold;
             }
 
-            nav a:hover {
-                text-decoration: underline;
-            }
-
-            h2 {
-                color: #ff8fb1;
-                margin-top: 30px;
-            }
+            h2 { color:#ff8fb1; margin-top:30px; }
 
             table {
-                margin: 30px auto;
-                border-collapse: collapse;
-                width: 70%;
-                background: #ffe6ef;
-                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-                border-radius: 10px;
-                overflow: hidden;
+                margin:30px auto;
+                border-collapse:collapse;
+                width:70%;
+                background:#ffe6ef;
+                box-shadow:0 4px 8px rgba(0,0,0,0.1);
+                border-radius:10px;
+                overflow:hidden;
             }
 
-            th, td {
-                padding: 12px;
-                border-bottom: 1px solid #ddd;
-            }
+            th, td { padding:12px; border-bottom:1px solid #ddd; }
+            th { background:#F9CDD5; }
 
-            th {
-                background: #F9CDD5;
-            }
-
-            tr:hover {
-                background-color: #fff0f5;
-            }
+            tr:hover { background:#fff0f5; }
 
             .btn {
-                display: inline-block;
-                margin-top: 20px;
-                text-decoration: none;
-                background: #A5B68D;
-                color: white;
-                padding: 10px 15px;
-                border-radius: 5px;
+                margin-top:20px;
+                display:inline-block;
+                padding:10px 15px;
+                background:#A5B68D;
+                color:white;
+                text-decoration:none;
+                border-radius:5px;
             }
 
-            .btn:hover {
-                background: #5fc43c;
-            }
-
-            footer {
-                margin-top: 40px;
-                background: #F9CDD5;
-                padding: 10px;
-            }
+            footer { margin-top:40px; background:#F9CDD5; padding:10px; }
         </style>
     </head>
 
@@ -223,8 +195,8 @@ function getStyledPage(title, rows) {
 
         <nav>
             <a href="/mainpage.html">Home</a>
-            <a href="/rm3.html">Order</a>
-            <a href="#">Recipe</a>
+            <a href="/rm3.html">RM3 Order</a>
+            <a href="/orders">All Orders</a>
         </nav>
 
         <h2>${title}</h2>
@@ -255,5 +227,5 @@ function getStyledPage(title, rows) {
 // START SERVER
 // =========================
 app.listen(8080, () => {
-    console.log("🚀 Server running");
+    console.log("🚀 Server running on port 8080");
 });
